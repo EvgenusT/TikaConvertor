@@ -1,29 +1,30 @@
 import org.apache.tika.parser.txt.CharsetDetector;
+
 import java.io.UnsupportedEncodingException;
 
 public class TikaMain {
 
-    static String word = "Ïđèâạ̊";
-    static String utf8 = "UTF-8";
-    static String windows1251 = "windows-1251";
-    static String KOI8 = "KOI8-R";
 
     public static void main(String[] args) throws UnsupportedEncodingException {
-        checkEncoding(word);
-        encodingText(word, utf8);
 
-          }
+    }
 
-    private static void checkEncoding(String forCheck) {
+    public void getEncoding(String forEncodingText, String encodingFormat) {
+        encodingText(forEncodingText, encodingFormat);
+    }
+
+    public static String checkEncoding(String forCheck) {
 
         // проверка кодировки в тексте
         CharsetDetector detector = new CharsetDetector();
         detector.setText(forCheck.getBytes());
-        System.out.println("Пришло слово: " + word + "\n" + "в кодировке : " + detector.detect());
+        String resultCheck = detector.detect().toString();
+
+        return resultCheck;
 
     }
 
-    private static void encodingText(String forEncodingText, String encodingFormat) {
+    public static String encodingText(String forEncodingText, String encodingFormat) {
 
         //перекодировка в нужный формат
         CharsetDetector detector = new CharsetDetector();
@@ -31,7 +32,7 @@ public class TikaMain {
         System.out.println("\n" + "передано на проверку: " + text + "\n");
         detector.setText(text.getBytes());
         System.out.println("Перекодирован текст в:  " + text + "\n" + "Новая кодировка: " + detector.detect());
-
+        return text;
     }
 
 }
